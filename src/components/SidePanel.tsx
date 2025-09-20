@@ -1,6 +1,7 @@
 import { useMemo, useRef } from 'react'
 import type { ChangeEvent } from 'react'
 import { usePathStore } from '../store/usePathStore'
+import { useShallow } from 'zustand/react/shallow'
 import { applyMotorInversion, arcMotorDegrees, lineMotorDegrees, turnMotorDegrees } from '../utils/kinematics'
 import { validateDocument, canExport } from '../utils/validation'
 import { generatePybricksScript, generateSvgExport } from '../utils/exporters'
@@ -32,12 +33,14 @@ export const SidePanel = ({ ghostState }: SidePanelProps) => {
     resolved,
     exportModel,
     importModel,
-  } = usePathStore((state) => ({
-    doc: state.doc,
-    resolved: state.resolved,
-    exportModel: state.exportModel,
-    importModel: state.importModel,
-  }))
+  } = usePathStore(
+    useShallow((state) => ({
+      doc: state.doc,
+      resolved: state.resolved,
+      exportModel: state.exportModel,
+      importModel: state.importModel,
+    })),
+  )
 
   const validationWarnings = useMemo(
     () => [...validateDocument(doc), ...resolved.warnings],

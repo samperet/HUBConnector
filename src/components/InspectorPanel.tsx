@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import type { ChangeEvent } from 'react'
 import { usePathStore } from '../store/usePathStore'
+import { useShallow } from 'zustand/react/shallow'
 import type { ResolvedSegment, TurnControlMode } from '../types'
 import { SpeedProfileEditor } from './SpeedProfileEditor'
 import { distance } from '../utils/geometry'
@@ -57,13 +58,15 @@ export const InspectorPanel = () => {
     updateWaypoint,
     resolved,
     doc,
-  } = usePathStore((state) => ({
-    selection: state.selection,
-    updateSegment: state.updateSegment,
-    updateWaypoint: state.updateWaypoint,
-    resolved: state.resolved,
-    doc: state.doc,
-  }))
+  } = usePathStore(
+    useShallow((state) => ({
+      selection: state.selection,
+      updateSegment: state.updateSegment,
+      updateWaypoint: state.updateWaypoint,
+      resolved: state.resolved,
+      doc: state.doc,
+    })),
+  )
 
   const selectedSegment = useMemo(() => {
     if (selection.type !== 'segment') return undefined

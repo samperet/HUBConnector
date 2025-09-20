@@ -4,6 +4,7 @@ import PathCanvas from './components/PathCanvas'
 import InspectorPanel from './components/InspectorPanel'
 import SidePanel from './components/SidePanel'
 import { usePathStore } from './store/usePathStore'
+import { useShallow } from 'zustand/react/shallow'
 import type { GhostState } from './components/PathCanvas'
 import './App.css'
 
@@ -30,18 +31,20 @@ function App() {
     undo,
     redo,
     reset,
-  } = usePathStore((state) => ({
-    doc: state.doc,
-    setMeta: state.setMeta,
-    settings: state.doc.settings,
-    updateSettings: state.updateSettings,
-    selection: state.selection,
-    removeSegment: state.removeSegment,
-    removeWaypoint: state.removeWaypoint,
-    undo: state.undo,
-    redo: state.redo,
-    reset: state.reset,
-  }))
+  } = usePathStore(
+    useShallow((state) => ({
+      doc: state.doc,
+      setMeta: state.setMeta,
+      settings: state.doc.settings,
+      updateSettings: state.updateSettings,
+      selection: state.selection,
+      removeSegment: state.removeSegment,
+      removeWaypoint: state.removeWaypoint,
+      undo: state.undo,
+      redo: state.redo,
+      reset: state.reset,
+    })),
+  )
 
   const [ghostState, setGhostState] = useState<GhostState | null>(null)
 

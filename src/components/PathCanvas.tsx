@@ -4,6 +4,7 @@ import Konva from 'konva'
 import classNames from 'classnames'
 import { useElementSize } from '../hooks/useElementSize'
 import { usePathStore } from '../store/usePathStore'
+import { useShallow } from 'zustand/react/shallow'
 import { distance, headingBetween, normalizeDegrees, toRadians } from '../utils/geometry'
 import type { Pose, ResolvedSegment, Segment } from '../types'
 
@@ -175,18 +176,20 @@ export const PathCanvas = ({ onGhostUpdate }: PathCanvasProps) => {
     setSelection,
     updateSegment,
     doc,
-  } = usePathStore((state) => ({
-    resolved: state.resolved,
-    tool: state.tool,
-    setTool: state.setTool,
-    addLine: state.addLine,
-    addArc: state.addArc,
-    addTurn: state.addTurn,
-    addWaypoint: state.addWaypoint,
-    setSelection: state.setSelection,
-    updateSegment: state.updateSegment,
-    doc: state.doc,
-  }))
+  } = usePathStore(
+    useShallow((state) => ({
+      resolved: state.resolved,
+      tool: state.tool,
+      setTool: state.setTool,
+      addLine: state.addLine,
+      addArc: state.addArc,
+      addTurn: state.addTurn,
+      addWaypoint: state.addWaypoint,
+      setSelection: state.setSelection,
+      updateSegment: state.updateSegment,
+      doc: state.doc,
+    })),
+  )
 
   const ghostSamples = useMemo(() => generateGhostSamples(resolved.segments), [resolved.segments])
   const ghostSample = ghostSamples[frameIndex]

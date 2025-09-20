@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import type { FormEvent } from 'react'
 import type { MotorPort } from '../types'
 import { usePathStore } from '../store/usePathStore'
+import { useShallow } from 'zustand/react/shallow'
 import { validateRobotConfig } from '../utils/validation'
 
 const MOTOR_PORTS: MotorPort[] = ['A', 'B', 'C', 'D', 'E', 'F']
@@ -25,17 +26,19 @@ export const ConfigPanel = () => {
     loadRobotProfile,
     deleteRobotProfile,
     setDefaultProfile,
-  } = usePathStore((state) => ({
-    robot: state.doc.robot,
-    updateRobot: state.updateRobot,
-    updateRobotWheelDiameter: state.updateRobotWheelDiameter,
-    updateRobotWheelCircumference: state.updateRobotWheelCircumference,
-    robotProfiles: state.robotProfiles,
-    saveRobotProfile: state.saveRobotProfile,
-    loadRobotProfile: state.loadRobotProfile,
-    deleteRobotProfile: state.deleteRobotProfile,
-    setDefaultProfile: state.setDefaultProfile,
-  }))
+  } = usePathStore(
+    useShallow((state) => ({
+      robot: state.doc.robot,
+      updateRobot: state.updateRobot,
+      updateRobotWheelDiameter: state.updateRobotWheelDiameter,
+      updateRobotWheelCircumference: state.updateRobotWheelCircumference,
+      robotProfiles: state.robotProfiles,
+      saveRobotProfile: state.saveRobotProfile,
+      loadRobotProfile: state.loadRobotProfile,
+      deleteRobotProfile: state.deleteRobotProfile,
+      setDefaultProfile: state.setDefaultProfile,
+    })),
+  )
 
   const [profileName, setProfileName] = useState('')
 
