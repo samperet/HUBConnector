@@ -6,7 +6,7 @@ import {
   mmToMotorDegrees,
   turnMotorDegrees,
 } from '../kinematics'
-import { RobotConfig } from '../../types'
+import type { RobotConfig } from '../../types'
 
 const mockRobot = (): RobotConfig => ({
   ports: { left: 'C', right: 'D', aux: [] },

@@ -1,9 +1,10 @@
-import { ChangeEvent, useMemo, useRef } from 'react'
+import { useMemo, useRef } from 'react'
+import type { ChangeEvent } from 'react'
 import { usePathStore } from '../store/usePathStore'
 import { applyMotorInversion, arcMotorDegrees, lineMotorDegrees, turnMotorDegrees } from '../utils/kinematics'
 import { validateDocument, canExport } from '../utils/validation'
 import { generatePybricksScript, generateSvgExport } from '../utils/exporters'
-import { AngularSpeedProfile, LinearSpeedProfile } from '../types'
+import type { AngularSpeedProfile, LinearSpeedProfile } from '../types'
 import type { GhostState } from './PathCanvas'
 
 const estimateLinearDuration = (length: number, profile: LinearSpeedProfile) => {

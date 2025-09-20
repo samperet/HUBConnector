@@ -1,5 +1,6 @@
-import { FormEvent, useMemo, useState } from 'react'
-import { MotorPort } from '../types'
+import { useMemo, useState } from 'react'
+import type { FormEvent } from 'react'
+import type { MotorPort } from '../types'
 import { usePathStore } from '../store/usePathStore'
 import { validateRobotConfig } from '../utils/validation'
 

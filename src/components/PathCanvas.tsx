@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { useElementSize } from '../hooks/useElementSize'
 import { usePathStore } from '../store/usePathStore'
 import { distance, headingBetween, normalizeDegrees, toRadians } from '../utils/geometry'
-import { Pose, ResolvedSegment, Segment } from '../types'
+import type { Pose, ResolvedSegment, Segment } from '../types'
 
 const GRID_SPACING_MM = 50
 const GRID_BOLD_INTERVAL = 5
@@ -154,8 +154,8 @@ const generateGhostSamples = (segments: ResolvedSegment[]): GhostSample[] => {
 
 export const PathCanvas = ({ onGhostUpdate }: PathCanvasProps) => {
   const { ref, size } = useElementSize<HTMLDivElement>()
-  const stageRef = useRef<Konva.Stage>(null)
-  const animationRef = useRef<number>()
+  const stageRef = useRef<Konva.Stage | null>(null)
+  const animationRef = useRef<number | null>(null)
   const [scale, setScale] = useState(1)
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [showGrid, setShowGrid] = useState(true)
@@ -592,7 +592,7 @@ export const PathCanvas = ({ onGhostUpdate }: PathCanvasProps) => {
                 stroke="#2563eb"
                 strokeWidth={1.5}
                 draggable
-                onDragMove={(evt) => onHandleDragMove(handle, evt)}
+                onDragMove={() => onHandleDragMove(handle)}
                 onDragStart={() => onHandleDragStart(handle)}
                 onClick={(evt) => {
                   evt.cancelBubble = true

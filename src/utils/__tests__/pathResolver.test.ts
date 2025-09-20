@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { resolveSegments } from '../pathResolver'
-import { LineSegment, PathSettings, Segment } from '../../types'
+import type { LineSegment, PathSettings, Segment } from '../../types'
 
 const makeLine = (id: string, length: number, heading: number): LineSegment => ({
   id,

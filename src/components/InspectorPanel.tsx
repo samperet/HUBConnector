@@ -1,6 +1,7 @@
-import { ChangeEvent, useMemo } from 'react'
+import { useMemo } from 'react'
+import type { ChangeEvent } from 'react'
 import { usePathStore } from '../store/usePathStore'
-import { ResolvedSegment, TurnControlMode } from '../types'
+import type { ResolvedSegment, TurnControlMode } from '../types'
 import { SpeedProfileEditor } from './SpeedProfileEditor'
 import { distance } from '../utils/geometry'
 
@@ -140,6 +141,15 @@ export const InspectorPanel = () => {
             />
           </label>
         </div>
+      </aside>
+    )
+  }
+
+  if (!selectedSegment) {
+    return (
+      <aside className="inspector">
+        <h2>Inspector</h2>
+        <p>The selected segment could not be found.</p>
       </aside>
     )
   }

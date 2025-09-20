@@ -1,5 +1,5 @@
-import { ChangeEvent } from 'react'
-import { AngularSpeedProfile, LinearSpeedProfile, ProfileShape } from '../types'
+import type { ChangeEvent } from 'react'
+import type { AngularSpeedProfile, LinearSpeedProfile, ProfileShape } from '../types'
 
 interface BaseProps {
   shapeLabel?: string

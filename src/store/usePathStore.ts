@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { nanoid } from 'nanoid'
 import { formatISO } from 'date-fns'
-import {
+import type {
   ArcSegment,
   LineSegment,
   PathMeta,

@@ -1,4 +1,4 @@
-import { RobotConfig } from '../types'
+import type { RobotConfig } from '../types'
 import { toRadians } from './geometry'
 
 export const wheelCircumference = (diameterMm: number) => Math.PI * diameterMm

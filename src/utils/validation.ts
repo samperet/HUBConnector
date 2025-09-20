@@ -1,5 +1,5 @@
-import { PathDocument } from '../store/usePathStore'
-import { RobotConfig, ValidationWarning } from '../types'
+import type { PathDocument } from '../store/usePathStore'
+import type { RobotConfig, ValidationWarning } from '../types'
 
 const uniquePorts = (ports: string[]): boolean => new Set(ports).size === ports.length
 
