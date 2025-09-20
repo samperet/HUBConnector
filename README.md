@@ -6,10 +6,21 @@ HUBConnector is an interactive planning studio for building precision paths for 
 
 ## Getting started
 
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 20 or newer (the project is tested with Node 20 LTS).
+- npm 10+ (ships with Node 20). Other package managers such as pnpm/yarn are not officially supported yet.
+
 ```bash
+# from the project root (the folder that contains package.json)
 npm install
 npm run dev
 ```
+
+> If you see `npm ERR! enoent Could not read package.json`, double-check that you are running the commands
+> inside the extracted project folder (e.g. `HUBConnector/`) and that `package.json` exists in the current
+> directory. macOS can sometimes open a Terminal window in your Downloads directory rather than inside the
+> unzipped project—`cd` into the project first.
 
 Open the dev server URL shown in the terminal. The layout includes:
 
